@@ -1,3 +1,5 @@
+get.pdf.data <- function(){
+
 ####################################################################
 ####################################################################
 ## Name: faculty_allyrs.R
@@ -18,62 +20,56 @@
 ####################################################################
 ####################################################################
 
-setwd("c:/Users/Andrew/Desktop/R stuff/faculty project/raw data")
+    setwd("c:/Users/Andrew/Desktop/R stuff/faculty project/raw data")
 
-## Establish trim function to remove leading and trailing blanks
+    ## Establish trim function to remove leading and trailing blanks
 
-.trim <- function(str){
-    names(str) <- c()
-    str <- sub("^ +", "", str)
-    str <- sub(" +$", "", str)
-}
+    .trim <- function(str){
+        names(str) <- c()
+        str <- sub("^ +", "", str)
+        str <- sub(" +$", "", str)
+    }
 
-alldata <- data.frame()
+    y.all.years <- data.frame()
 
-## Read in data originally in PDF format
+    ## Read in data originally in PDF format
 
-## The yrs vector encompasses all the years of data to be run using the
-## PDF data read-in function
+    ## The yrs vector encompasses all the years of data to be run using the
+    ## PDF data read-in function
 
-yrs <- c(2001:2010)
+    years <- c(2001:2010)
 
-## The following loop runs through one year of data at a time
+    ## The following loop runs through one year of data at a time
 
-for(j in 1:length(yrs)){
+    for(i in 1:length(years)){
 
-    ## Read in and structure the data such that the information can be
-    ## more easily extracted
+        ## Read in and structure the data such that the information can be
+        ## more easily extracted
 
-    rawdata <- setup.pdf.data(yrs, j)
+        current.year <- years[i]
 
-    degree.info <- get.degree.info(rawdata[["deglines"]])
+        x <- setup.pdf.data(current.year)
 
-    prof.info <- get.prof.info(rawdata[["professor"]],
-                               rawdata[["professor"]])
+        prof.info <- get.prof.info(x, current.year)
 
-    ## Department information is included in HTML format, therefore a
-    ## blank field must be created to later append the data
+        degree.info <- get.degree.info(x)
 
-    department <- rep("N/A", times = length(rawdata[["professor"]]))
+        ## Department information is included in HTML format, therefore a
+        ## blank field must be created to later append the data
 
-    ## Combine all the data for the year in a dataframe
+        academic.year <- rep(paste(current.year - 1,
+                                   current.year, sep = "-"),
+                             times = nrow(prof.info))
+        academic.year <- data.frame(academic.year)
 
-    data <- data.frame("academic.year" = year.vars[["acyr"]],
-                       "professor" = rawdata[["professor"]],
-                       first.name,
-                       middle.name,
-                       last.name,
-                       "undergrad.degree" = degree1,
-                       "undergrad.school" = school1,
-                       undergrad.year,
-                       "grad.degree" = degree2,
-                       "grad.school" = school2,
-                       grad.year,
-                       "est.age" = age,
-                       title,
-                       department)
+        ## Combine all the data for the year in a dataframe
 
-    ## Append current year's data with all other years in the loop
+        y <- cbind(academic.year, prof.info, degree.info)
 
-    alldata <- rbind(alldata, data)
+        ## Append current year's data with all other years in the loop
+
+        y.all.years <- rbind(y.all.years, y)
+    }
+save(y.all.years, file = "pdf.data.Rdata")
+return(y.all.years)
 }

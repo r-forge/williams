@@ -1,14 +1,10 @@
-setup.html.data <-
-function(yrs, j){
+setup.html.data <- function(yr){
 
     ## Read in the raw data for the current year in the loop
 
-    x <- readLines(paste(yrs[j], "data.txt", sep = ""))
+    yr1 <- yr - 1
 
-    ## Extract the lines containing department names
+    yrs <- paste(substr(yr1, 3, 4), substr(yr, 3, 4), sep = "")
 
-    y <- grep("\\(Div.", x)
-
-    return(list(x = x, y = y))
+    return(unlist(readLines(paste(yrs, "data.txt", sep = ""))))
 }
-

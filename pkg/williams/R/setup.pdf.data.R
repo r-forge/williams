@@ -1,5 +1,4 @@
-setup.pdf.data <-
-function(yrs, j){
+setup.pdf.data <- function(yr){
 
     ## The setup.pdfdata function creates vectors from the raw data
     ## that enable subsequent functions to more easily extract the
@@ -13,20 +12,18 @@ function(yrs, j){
 
     ## Read in the raw data file
 
-    year <- paste(substr(yrs[j] - 1, 3, 4), substr(yrs[j], 3, 4), sep = "")
+    year <- paste(substr(yr - 1, 3, 4), substr(yr, 3, 4), sep = "")
 
     x <- readLines(paste("catalog", year, "-sub.txt", sep = ""))
 
     ## Handle the difference in the data between 2010 and all other years
     ## for isolating all the professor rows in the data
 
-    if(yrs[j] == 2010){
+    if(yr == 2010){
         prof <- x[regexpr("\\,", x) != -1 & regexpr("\\(\\d", x) == -1]
     } else{
         prof <- x[regexpr("\\w  ", x) !=-1 & regexpr("\\(\\d", x) == -1]
     }
-
-    prof <- .trim(prof)
 
     z <- numeric(length(prof))
     deglines <- character(length(prof))
@@ -43,7 +40,7 @@ function(yrs, j){
         ## degree lines to distinguish between the person's
         ## undergraduate and graduate degrees
 
-        if(i == 195 & yrs[j] == 2010){
+        if(i == 195 & yr == 2010){
             deglines[i] <- gsub("\\,", ";", deglines[i])
         }
 
@@ -60,20 +57,6 @@ function(yrs, j){
            }
     }
 
-    ## Isolate the professor's name from his title by using a comma
-    ## seperator in 2010 and two spaces in all other years
-
-    if(yrs[j] == 2010){
-        professor <- substr(prof, regexpr("\\w", prof),
-                            regexpr("\\,", prof) - 1)
-    } else{
-        professor <- substr(prof, regexpr("\\w", prof),
-                            regexpr("\\  ", prof) - 1)
-    }
-
-    professor <- .trim(professor)
-
-    return(list(prof = prof,
-                    deglines = deglines, professor = professor))
+    return(data.frame(prof, deglines))
  }
 

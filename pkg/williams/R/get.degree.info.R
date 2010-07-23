@@ -1,5 +1,4 @@
-get.degree.info <-
-function(degreelines){
+get.degree.info <- function(x){
 
         ## The get.year function extracts the years during which
         ## undergraduate and graduate degrees were earned years from
@@ -16,7 +15,7 @@ function(degreelines){
         ## parentheses
 
 
-    x <- degreelines
+    x <- as.character(x$deglines)
 
     ## The following first letters indicate that the degree is a
     ## graduate degree. It is necessary to establish because some

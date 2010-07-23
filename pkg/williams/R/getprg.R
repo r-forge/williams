@@ -21,7 +21,9 @@ get.department <- function(x){
 
     x[y[z]] <- sub("<", " \\(", x[y[z]])
 
-    return(.trim(substr(x[y], 1, regexpr("\\(", x[y]) - 1)))
+    department <- .trim(substr(x[y], 1, regexpr("\\(", x[y]) - 1))
+
+    return(data.frame(department))
 }
 
 
