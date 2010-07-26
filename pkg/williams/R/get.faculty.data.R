@@ -1,18 +1,16 @@
+get.faculty.data <- function(){
 
+    pdf.data <- get.pdf.data()
 
-pdf.data <- get.pdf.data()
+    html.data <- get.html.data()
 
-html.data <- get.html.data()
+    manual.data <- get.manual.data()
 
+    faculty.data <- combine.all.data(pdf.data, html.data, manual.data)
 
+    save(faculty.data, file = "faculty.data.Rdata")
 
-## academic.year <- rep(acyr, times = nrow(info.html))
-##    first.name <- rep(NA, times = nrow(info.html))
-##    middle.name <- rep(NA, times = nrow(info.html))
-##    last.name <- rep(NA, times = nrow(info.html))
-##    undergrad.degree <- rep(NA, times = nrow(info.html))
-##   undergrad.school <- rep(NA, times = nrow(info.html))
-##    undergrad.year <- rep(NA, times = nrow(info.html))
-##    grad.degree <- rep(NA, times = nrow(info.html))
-##    grad.school <- rep(NA, times = nrow(info.html))
-##    grad.year <- rep(NA, times = nrow(info.html))
+    write.csv(faculty.data, file = "facultydata.csv")
+
+    return(faculty.data)
+}

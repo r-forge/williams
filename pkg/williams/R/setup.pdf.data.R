@@ -14,7 +14,12 @@ setup.pdf.data <- function(yr){
 
     year <- paste(substr(yr - 1, 3, 4), substr(yr, 3, 4), sep = "")
 
-    x <- readLines(paste("catalog", year, "-sub.txt", sep = ""))
+    filename <- system.file("faculty",
+                            "pdf data",
+                            paste("catalog", year, "-sub.txt", sep = ""),
+                            package = "williams")
+
+    x <- readLines(filename)
 
     ## Handle the difference in the data between 2010 and all other years
     ## for isolating all the professor rows in the data
@@ -53,7 +58,7 @@ setup.pdf.data <- function(yr){
 
         if(regexpr("\\(\\d", deglines[i]) == -1 &
            !(substr(deglines[i], 1, 4) %in% degs)){
-               NA
+               deglines[i] <- NA
            }
     }
 

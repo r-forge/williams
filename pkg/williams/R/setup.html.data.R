@@ -6,5 +6,10 @@ setup.html.data <- function(yr){
 
     yrs <- paste(substr(yr1, 3, 4), substr(yr, 3, 4), sep = "")
 
-    return(unlist(readLines(paste(yrs, "data.txt", sep = ""))))
+    filename <- system.file("faculty",
+                            "html data",
+                            paste(yrs, "data.txt", sep = ""),
+                            package = "williams")
+
+    return(unlist(readLines(filename)))
 }

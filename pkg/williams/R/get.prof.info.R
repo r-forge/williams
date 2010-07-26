@@ -12,18 +12,24 @@ get.prof.info <- function(x, yr){
         ## indicates the last name, i=2 the middle name, and i=3 the
         ## first name.
 
-    x <- x$prof
+    x <- as.character(x$prof)
 
     if(yr == 2010){
         professor <- substr(x, regexpr("\\w", x),
                             regexpr("\\,", x) - 1)
+
+        position <- substr(x, regexpr("\\,", x) + 1, nchar(x))
+
     } else{
         professor <- substr(x, regexpr("\\w", x),
                             regexpr("\\  ", x) - 1)
+
+        position <- substr(x, regexpr("\\  ", x) + 1, nchar(x))
     }
 
-    professor <- .trim(professor)
+    professor <- sub("^ +", "", professor)
+    professor <- sub(" +$", "", professor)
 
-    return(data.frame(professor))
+    return(data.frame(professor, position))
 
 }

@@ -1,0 +1,135 @@
+\documentclass[a4paper]{report}
+\usepackage[round]{natbib}
+
+
+\usepackage{Rnews}
+\usepackage{fancyvrb}
+\usepackage{Sweave}
+
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontsize=\small,fontshape=sl}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{fontsize=\small}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{fontsize=\small,fontshape=sl}
+
+%% \SweaveOpts{prefix.string=graphics/portfolio}
+
+\bibliographystyle{abbrvnat}
+
+\begin{document}
+\begin{article}
+
+\title{Williams College Faculty}
+\author{Andrew Leeser}
+
+%%\VignetteIndexEntry{Using the orderbook package}
+%%\VignetteDepends{orderbook}
+
+<<echo = FALSE>>=
+options(width = 50, digits = 2, scipen = 5)
+cat.df.without.rownames <- function (d, file = ""){
+  stopifnot(is.data.frame(d))
+  row.names(d) <- 1:nrow(d)
+  x <- NULL
+  conn <- textConnection("x", "w", local = TRUE)
+  capture.output(print(d), file = conn)
+  close(conn)
+  cat(substring(x, first = max(nchar(row.names(d))) + 2), sep = "\n",
+      file = file)
+}
+@
+
+\maketitle
+
+
+\setkeys{Gin}{width=0.95\textwidth}
+
+\section*{Introduction}
+
+The \pkg{williams} package extracts Williams College faculty
+information from a variety of course catalogs over the span of
+academic years 1965-2010. The catalogs we used were provided in
+different formats: pdf, html, and hard copies. While we developed functions
+to extract information from the pdf and html data, the hard copy
+data was entered by hand.
+
+\section*{Examples}
+
+The Williams College faculty data can be used in many ways. Below are
+a few examples of simple analyses that can be performed using the
+data extracted in the \pkg{williams} package.
+
+<<echo = FALSE>>=
+library(williams)
+x <- get.faculty.data()
+yrs <- c(1995,2001:2010)
+x$year <- as.numeric(substr(x$academic.year,6,10))
+y <- x[x$year %in% yrs & !is.na(x$undergrad.year),]
+y$age <- 2010 - y$undergrad.year + 22
+z <- aggregate(y$age, list(year = y$year), mean)
+@
+
+\begin{figure}
+  \centering
+  \vspace*{.1in}
+<<fig = TRUE, echo = FALSE>>=
+barplot(z$x, names.arg = z$year, space = .2,
+        main = "Average Faculty Age Over Time", xlab = "Year",
+        ylab = "Average Age", ylim = c(0,60), las=3)
+@
+\caption{
+The graph above plots the average age of all faculty members for each
+academic year. The age is estimated by calculating the number number
+of years since the faculty member received their undergraduate degree
+and assuming an age of 22 at that time (age = 2010 - undergrad.year +
+22). Unfortunately, not all the years of data provide degree
+information, which explains the gap in the plot between 1995 and
+2001. Furthermore, degree information was not provided for all faculty
+members, so missing values were excluded as a result.
+}
+
+\end{figure}
+
+<<echo = FALSE>>=
+yrs <- c(1998:2000)
+titles <- c("Professor", "Associate Professor", "Assistant Professor")
+x$ttl <- ifelse(x$year %in% yrs,
+              ifelse(x$title %in% titles, x$title, "Other"),
+              ifelse(regexpr("Associate",x$position) != -1,
+                     "Associate Professor",
+                     ifelse(regexpr("Assistant",x$position) != -1,
+                            "Assistant Professor",
+			ifelse(regexpr("Professor",x$position) != -1,
+                               "Professor",
+                               "Other"))))
+z <- table(x$year, x$ttl)
+@
+
+\begin{figure}
+  \centering
+  \vspace*{.1in}
+<<fig = TRUE, echo = FALSE>>=
+plot(z, main = "Faculty Titles By Year",
+	xlab = "Year", ylab = "Title", las = 2)
+@
+
+\caption{
+The graph above plots the Williams College faculty titles over the
+different academic years. The proportion of each title as a percentage
+of the faculty for each academic year is easily comparable across
+time, by comparing the vertical lengths of each bar. Furthermore, the
+relative sizes of each year's faculty is represented by the width of
+each bar, allowing us to compare overall faculty size across
+time. Finally, both measures can be combined to compare the absolute
+number of faculty within each title by comparing the areas of each bar.
+}
+\end{figure}
+
+\address{Andrew Leeser \\
+  Kane Capital Management \\
+  Cambridge, MA, USA\\
+  \email{aml05williams@yahoo.com}
+}
+
+
+\bibliography{orderbook}
+\end{article}
+\end{document}

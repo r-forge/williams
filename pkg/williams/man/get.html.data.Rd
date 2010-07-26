@@ -1,27 +1,25 @@
-\name{get.degree.info}
-\alias{get.degree.info}
+\name{get.html.data}
+\alias{get.html.data}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Extract professor education information from pdf faculty data
+Extract Faculty Data from html Files
 }
 \description{
-get.degree.info extracts education information from Williams
-College faculty data originally in pdf format. The output is a dataframe
-containing undergraduate degree, year and institution as well as
-graduate degree, year and institution.
+get.html.data reads in Williams College faculty data from .txt files that
+were generated from html files downloaded for academic years
+1998-2000. The html files were converted to txt and scrubbed to
+facilitate the read-in process in R. See the package README.txt file for
+additional details on the conversion and scrubbing. get.html.data returns
+a dataframe containing all the faculty data for those years.
 }
 \usage{
-get.degree.info(x)
+get.html.data()
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-x is a dataframe created by the setup.pdf.data function which includes
-all professor and education lines of data for a given year
-}
 }
 \details{
-get.degree.info uses only the education information in x.
+%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
 %%  ~Describe the value returned
@@ -46,7 +44,6 @@ Andrew Leeser
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-get.degree.info(x)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

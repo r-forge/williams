@@ -8,6 +8,11 @@ get.info.html <- function(x, department, current.year){
     ## vector containing information regarding the line postion of
     ## each department within x.
 
+    trim <- function(str){
+        str <- sub("^ +", "", str)
+        str <- sub(" +$", "", str)
+    }
+
     y <- grep("\\(Div.", x)
 
     allprofs <- character()
@@ -124,8 +129,8 @@ get.info.html <- function(x, department, current.year){
             ## current department faculty is appended to a cumulative
             ## vector for all departments
 
-            allprofs <- .trim(c(allprofs, profs))
-            alltitles <- .trim(gsub("<I>", "", c(alltitles, title)))
+            allprofs <- trim(c(allprofs, profs))
+            alltitles <- trim(gsub("<I>", "", c(alltitles, title)))
             alldepts <- c(alldepts, dept)
         }
     }
