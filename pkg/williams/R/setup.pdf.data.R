@@ -1,34 +1,43 @@
-setup.pdf.data <- function(yr){
+setup.pdf.data <- function(year){
 
-    ## The setup.pdfdata function creates vectors from the raw data
-    ## that enable subsequent functions to more easily extract the
-    ## desired information. Specifically, the lines containing names
-    ## and titles are seperated from those with information regarding
-    ## professor's degrees. The function has two inputs - yrs and j.
+    ## The setup.pdfdata function creates a dataframe from the raw txt
+    ## files that enable subsequent functions to more easily extract
+    ## the desired information. Specifically, the lines containing
+    ## names and titles are seperated from those with information
+    ## regarding professor's degrees. The function has one input - year.
 
-    ## yrs is a vector containing all the years of data which are to
-    ## be included in the final dataframe. j is a variable which loops
-    ## through each year in yrs.
+    ## year is the current year being run in the loop
 
-    ## Read in the raw data file
+    require(williams)
 
-    year <- paste(substr(yr - 1, 3, 4), substr(yr, 3, 4), sep = "")
+    ## Format the year to match the format in the txt filenames
+
+    year <- paste(substr(year - 1, 3, 4), substr(year, 3, 4), sep = "")
+
+    ## Establish the path and filename for the year's txt file
 
     filename <- system.file("faculty",
                             "pdf data",
                             paste("catalog", year, "-sub.txt", sep = ""),
                             package = "williams")
 
+    ## Read in the raw data file
+
     x <- readLines(filename)
 
-    ## Handle the difference in the data between 2010 and all other years
-    ## for isolating all the professor rows in the data
+    ## Handle the difference in the data between 2010 and all other
+    ## years for isolating all the professor rows in the data. In 2010
+    ## a comma separates the professor names and titles, whereas in
+    ## all other years a double-space is used.
 
-    if(yr == 2010){
+    if(year == 2010){
         prof <- x[regexpr("\\,", x) != -1 & regexpr("\\(\\d", x) == -1]
     } else{
         prof <- x[regexpr("\\w  ", x) !=-1 & regexpr("\\(\\d", x) == -1]
     }
+
+    ## Create empty vectors to assign to the degree information. The
+    ## size of the vectors should match the number of professors.
 
     z <- numeric(length(prof))
     deglines <- character(length(prof))
@@ -45,7 +54,7 @@ setup.pdf.data <- function(yr){
         ## degree lines to distinguish between the person's
         ## undergraduate and graduate degrees
 
-        if(i == 195 & yr == 2010){
+        if(i == 195 & year == 2010){
             deglines[i] <- gsub("\\,", ";", deglines[i])
         }
 
@@ -61,6 +70,11 @@ setup.pdf.data <- function(yr){
                deglines[i] <- NA
            }
     }
+
+    ## A dataframe is returned containing two variables - prof and
+    ## deglines. Prof Contains all lines of data with professor names
+    ## and titles, whereas deglines includes all lines of data with
+    ## degree information.
 
     return(data.frame(prof, deglines))
  }

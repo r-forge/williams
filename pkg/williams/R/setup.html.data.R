@@ -1,15 +1,27 @@
-setup.html.data <- function(yr){
+setup.html.data <- function(year){
 
-    ## Read in the raw data for the current year in the loop
+    ## setup.html.data reads in the data such that the professor
+    ## information can be easily extracted by other functions. It has
+    ## one input - year.
 
-    yr1 <- yr - 1
+    ## year is the current year being run in the loop
 
-    yrs <- paste(substr(yr1, 3, 4), substr(yr, 3, 4), sep = "")
+    require(williams)
+
+    ## Format the year to match the format in the txt filenames
+
+    yr1 <- year - 1
+
+    yrs <- paste(substr(yr1, 3, 4), substr(year, 3, 4), sep = "")
+
+    ## Establish the path and filename for the year's txt file
 
     filename <- system.file("faculty",
                             "html data",
                             paste(yrs, "data.txt", sep = ""),
                             package = "williams")
+
+    ## Read in the raw data file and return it as a vector
 
     return(unlist(readLines(filename)))
 }

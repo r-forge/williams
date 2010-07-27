@@ -45,11 +45,11 @@ cat.df.without.rownames <- function (d, file = ""){
 \section*{Introduction}
 
 The \pkg{williams} package extracts Williams College faculty
-information from a variety of course catalogs over the span of
-academic years 1965-2010. The catalogs we used were provided in
-different formats: pdf, html, and hard copies. While we developed functions
-to extract information from the pdf and html data, the hard copy
-data was entered by hand.
+information from a variety of course catalogs over the years 1965 to
+2010. The catalogs we used were provided in different formats: pdf,
+html, and hard copies. While we developed functions to extract
+information from the pdf and html data, the hard copy data was entered
+by hand.
 
 \section*{Examples}
 
@@ -59,7 +59,7 @@ data extracted in the \pkg{williams} package.
 
 <<echo = FALSE>>=
 library(williams)
-x <- get.faculty.data()
+x <- get.faculty()
 yrs <- c(1995,2001:2010)
 x$year <- as.numeric(substr(x$academic.year,6,10))
 y <- x[x$year %in% yrs & !is.na(x$undergrad.year),]
@@ -92,7 +92,8 @@ members, so missing values were excluded as a result.
 yrs <- c(1998:2000)
 titles <- c("Professor", "Associate Professor", "Assistant Professor")
 x$ttl <- ifelse(x$year %in% yrs,
-              ifelse(x$title %in% titles, x$title, "Other"),
+              ifelse(as.character(x$title) %in% titles,
+                     as.character(x$title), "Other"),
               ifelse(regexpr("Associate",x$position) != -1,
                      "Associate Professor",
                      ifelse(regexpr("Assistant",x$position) != -1,
@@ -100,15 +101,18 @@ x$ttl <- ifelse(x$year %in% yrs,
 			ifelse(regexpr("Professor",x$position) != -1,
                                "Professor",
                                "Other"))))
-z <- table(x$year, x$ttl)
+
+title <- factor(x$ttl, levels=c("Professor", "Associate Professor",
+                       "Assistant Professor", "Other"), ordered = TRUE)
+
+z <- table(x$year, title)
 @
 
 \begin{figure}
   \centering
   \vspace*{.1in}
 <<fig = TRUE, echo = FALSE>>=
-plot(z, main = "Faculty Titles By Year",
-	xlab = "Year", ylab = "Title", las = 2)
+plot(z, main = "Faculty Titles By Year", las = 2, ylab = "")
 @
 
 \caption{
@@ -123,13 +127,5 @@ number of faculty within each title by comparing the areas of each bar.
 }
 \end{figure}
 
-\address{Andrew Leeser \\
-  Kane Capital Management \\
-  Cambridge, MA, USA\\
-  \email{aml05williams@yahoo.com}
-}
-
-
-\bibliography{orderbook}
 \end{article}
 \end{document}

@@ -1,23 +1,34 @@
 get.info.html <- function(x, department, current.year){
 
-    ## The function get.info.2000 extracts the professor names and
+    ## The function get.info.html extracts the professor names and
     ## titles for each department and also assigns the department
-    ## information to each professor. The function has two inputs - x and y
+    ## information to each professor. The function has three inputs -
+    ## x, department and current.year
 
-    ## x is the entire raw data read in from the txt file. y is a
-    ## vector containing information regarding the line postion of
-    ## each department within x.
+    ## x is a vector consisting of every line read from the raw data
+    ## department is a dataframe containing the department listing
+    ## current.year is the current year being run in the loop
+
+    ## Establish a function trim to easily remove leading and trailing
+    ## blanks from character strings
 
     trim <- function(str){
         str <- sub("^ +", "", str)
         str <- sub(" +$", "", str)
     }
 
+    ## Identify all rows of x where a department name exists by
+    ## identifying the division information.
+
     y <- grep("\\(Div.", x)
+
+    ## Create empty character vectors for information to be extracted
 
     allprofs <- character()
     alltitles <- character()
     alldepts <- character()
+
+    ## Run a loop through each department
 
     for(i in 1:length(y)){
 
@@ -26,12 +37,25 @@ get.info.html <- function(x, department, current.year){
 
         z <- x[y[i]:(y[i] + 20)]
 
+        ## In the year 2000, the beginning of the professor
+        ## listing can be identified by the code for italics in html
+
         if(current.year == 2000 & length(grep("<I>", z)) != 0){
         id <- "<I>"
         start <- max(grep("<I>", z))
         end <- max(grep("</I>", z))
         } else{
+
+            ## In 1998 & 1999 we use the word professor to indicate
+            ## whether a professor listing exists for the department
+
             id <- "Professor"
+
+            ## Typically, the beginning and end of a professor listing
+            ## in 1999 data can be identified by a ">", however, in
+            ## one instance this isn't the case, so the start and end
+            ## lines are hard-coded as 6 and 9 respectively.
+
             if(current.year == 1999 & length(grep(id, z)) != 0){
                 if(i == 31){
                     start <- 6
@@ -41,6 +65,10 @@ get.info.html <- function(x, department, current.year){
                     end=grep(">",z)[4]-1
                 }
             } else{
+
+                ## In 1998, the start and end lines can be identified
+                ## by the word "JUSTIFY"
+
                 if(current.year == 1998 & length(grep(id, z)) != 0){
                     start=grep("JUSTIFY",z)[1]+1
                     end=grep("JUSTIFY",z)[2]-1
@@ -48,8 +76,8 @@ get.info.html <- function(x, department, current.year){
             }
         }
 
-        ## The faculty names are formatted in italics, so they can be
-        ## extracted by locating the HTML indicators <I> and </I>
+        ## Extract the professor listing using the indicators created
+        ## above for the different years
 
         if(length(grep(id, z)) != 0){
             q <- z[start:end]
@@ -134,6 +162,10 @@ get.info.html <- function(x, department, current.year){
             alldepts <- c(alldepts, dept)
         }
     }
+
+    ## Create and return a dataframe consisting of the listing of
+    ## professor names, titles and departments for academic years
+    ## 1998-2000.
 
     return(data.frame("professor" = allprofs,
                 "title" = alltitles,

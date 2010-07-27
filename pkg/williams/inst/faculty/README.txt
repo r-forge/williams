@@ -6,6 +6,8 @@ Raw Data Source:
 
 http://www.williams.edu/Registrar/catalog/archive.html
 
+PDF Data:
+
 2009-2010 - http://www.williams.edu/Registrar/catalog/catalog0910.pdf
 2008-2009 - http://www.williams.edu/Registrar/catalog/catalog0809.pdf
 2007-2008 - http://www.williams.edu/Registrar/catalog/catalog0708.pdf
@@ -17,15 +19,17 @@ http://www.williams.edu/Registrar/catalog/archive.html
 2001-2002 - http://www.williams.edu/Registrar/catalog/depts0102/catalog.pdf
 2000-2001 - http://www.williams.edu/Registrar/catalog/depts0001/catalog.pdf
 
-Data Scrub for PDF files:
+Data scrub for PDF files:
 1. Download PDF text extractor (http://www.a-pdf.com/text/index.htm) and extract text from raw data files into .txt files.
 2. Create a subset of the .txt file to only include faculty information by deleting all other text.
+
+HTML Data:
 
 1999-2000 – http://www.williams.edu/Registrar/catalog/deptlist9900.html
 1998-1999 – http://www.williams.edu/Registrar/catalog/deptlist9899.html
 1997-1998 – http://www.williams.edu/Registrar/catalog/deptlist9798.html
 
-Data Scrub for HTML files:
+Data scrub for HTML files:
 1. Download and install WinHTTrack Website Copier (http://www.httrack.com/).
 2. Name the project and select a destination path, then click next.
 3. Copy and paste the appropriate URL into the text box.
@@ -35,3 +39,16 @@ Data Scrub for HTML files:
 7. Browse the folders and select the destination path for the previously downloaded html data.
 8. Select htm as the data type from the dropdown menu and check the Include subfolders, and No Separator boxes.
 9. Click on 2. Combine all files and save the new combined txt file.
+
+Hard Copy Data:
+
+1964-1965 - 
+1974-1975 - http://www.ephblog.com/wp-content/uploads/2010/07/Faculty-1974-1975.pdf
+1984-1985
+1994-1995
+
+Data entry for hard copy data:
+1. The data was was manually entered into one Excel spreadsheet.
+2. The file was converted to a csv file within Excel
+
+Note: The hard copy data before 1995 includes faculty addresses that do not exist in other years.
