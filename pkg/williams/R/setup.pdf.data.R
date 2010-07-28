@@ -41,13 +41,25 @@ setup.pdf.data <- function(year){
 
     z <- numeric(length(prof))
     deglines <- character(length(prof))
+    dl <- character(length(prof))
 
     ## Isolate the degree rows in the data by finding the line after a
     ## professor row
 
     for(i in 1:length(prof)){
         z[i] <- which(x == prof[i])
-        deglines[i] <- x[(z[i] + 1)]
+
+        dl[i] <- x[(z[i] + 1)]
+
+        degs <- c("B.M.", "B.A.", "B.S.")
+
+        deglines[i] <- if(regexpr("\\(\\d", dl[i]) == -1 &
+                          regexpr("\\w  ", dl[i]) == -1 &
+                          !(substr(dl[i], 1, 4) %in% degs)){
+            x[(z[i] + 2)]
+        } else{
+            dl[i]
+        }
 
         ## Convert a comma seperator to a semi-colon in one line of
         ## data to make it consistent. Semi-colons are used in the
@@ -63,12 +75,10 @@ setup.pdf.data <- function(year){
         ## and the line not starting with one of the degrees in the
         ## list degs.
 
-        degs <- c("B.M.", "B.A.", "B.S.")
-
         if(regexpr("\\(\\d", deglines[i]) == -1 &
            !(substr(deglines[i], 1, 4) %in% degs)){
-               deglines[i] <- NA
-           }
+            deglines[i] <- NA
+        }
     }
 
     ## A dataframe is returned containing two variables - prof and

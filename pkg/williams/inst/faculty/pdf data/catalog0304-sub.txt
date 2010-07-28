@@ -69,7 +69,6 @@ B.A. (1976) University of New Orleans; M.F.A. (1979) California Institute of the
 Ernest D. Brown  Professor of Music
 B.A. (1969) Harvard; Ph.D. (1984) University of Washington
 Michael F. Brown  James N. Lambert ’39 Professor of Latin American Studies
-   and Director  of the Center for Technology in the Arts and Humanities
 A.B. (1972) Princeton; Ph.D. (1981) University of Michigan
 Kim B. Bruce  Frederick Latimer Wells Professor of Computer Science
 B.A. (1970) Pomona; Ph.D. (1975) University of Wisconsin
@@ -158,7 +157,7 @@ B.A. (1989) McGill; Ph.D. (1997) Cambridge
 * Charles B. Dew  Ephraim Williams Professor of American History and Fellow of the Oakley Center
 for the Humanities and Social Sciences
 B.A. (1958) Williams; Ph.D. (1964) Johns Hopkins
-William  DeWitt  C. Carlisle and Margaret Tippit Professor of Biology
+William DeWitt  C. Carlisle and Margaret Tippit Professor of Biology
 B.A. (1961) Williams; Ph.D. (1966) Princeton
 Margaret Diggs  Part-time Lecturer in the Arts and Humanities
 B.A. (1968) George Washington; M.F.A. (1975) Cranbrook Art Academy
@@ -390,7 +389,7 @@ for the Humanities and Social Sciences, Second Semester
 B.A. (1985) Harvard; Ph.D. (1995) University of Michigan
 Cornelius C. Kubler   Stanfield Professor of Asian Studies
 B.A. (1972) Cornell; M.A. (1978) National Taiwan University; Ph.D. (1981) Cornell
-Regina G.  Kunzel  Fairleigh S. Dickinson, Jr. Professor of History
+Regina G. Kunzel  Fairleigh S. Dickinson, Jr. Professor of History
 and Director of the Multicultural Center
 B.A. (1981) Stanford; Ph.D. (1990) Yale
 Steven Kuster  Assistant Professor of Physical Education
@@ -436,7 +435,7 @@ B.A. (1996) University of Michigan; Ph.D. (2003) Yale
 Charles M. Lovett, Jr.  Philip and Dorothy Schein Professor of Chemistry and
 Director of the Bronfman Science Center
 B.S. (1979) California State Poly.; Ph.D. (1985) Cornell
-Peter D.  Low  Assistant Professor of Art
+Peter D. Low  Assistant Professor of Art
 B.A. (1994) University of Toronto; Ph.D. (2001) Johns Hopkins
 Christina Lupton  Visiting Assistant Professor of English
 B.A. (1995) Curtain University, Australia; Ph.D. (2003) Rutgers
@@ -541,7 +540,7 @@ B.A. (1986) Wellesley; Ph.D. (1991) M.I.T.
 Jay M. Pasachoff  Field Memorial Professor of Astronomy and
 Director of the Hopkins Observatory
 A.B. (1963) Harvard; Ph.D. (1969) Harvard
-Darel  E. Paul  Assistant Professor of Political Science
+Darel E. Paul  Assistant Professor of Political Science
 B.A. (1990) University of Minnesota; Ph.D. (2001) University of Minnesota
 David R. Paulsen  Assistant Professor of Physical Education
 B.A. (1987) Williams; M.A. (1991) University of Michigan
@@ -683,7 +682,7 @@ Richard H. Stamelman  Professor in the Program of Comparative Literature
 B.A. (1963) Hamilton; Ph.D. (1968) Duke
 Peter E. Starenko  Visiting Assistant Professor of History
 B.A. (1987)Augustana College
-Heather M.  Stoll  Assistant Professor of Geosciences
+Heather M. Stoll  Assistant Professor of Geosciences
 B.A. (1994) Williams College; Ph.D. (1998) Princeton
 *** Jefferson Strait  Associate Professor of Physics
 A.B. (1975) Harvard; Ph.D. (1985) Brown

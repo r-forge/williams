@@ -1,10 +1,10 @@
 Package: williams
 Type: Package
-Title: What the package does (short line)
+Title: Read In Williams College Faculty Data
 Version: 1.0
 Date: 2010-07-14
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Author: Andrew Leeser
+Maintainer: Andrew Leeser <aml05williams@yahoo.com>
 Description: More about what it does (maybe more than one line)
-License: What license is it under?
+License: GPL (>= 2)
 LazyLoad: yes
