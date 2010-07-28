@@ -23,6 +23,11 @@ Data scrub for PDF files:
 1. Download PDF text extractor (http://www.a-pdf.com/text/index.htm) and extract text from raw data files into .txt files.
 2. Create a subset of the .txt file to only include faculty information by deleting all other text.
 
+A few manual edits were made to the txt files after scrubbing because of certain inconsistencies in the data. They are documented below:
+
+- Removed double-space between the names of Dewitt, Kunzel, Low, Paul, Stoll, and Stone.
+- For Cheryl Hicks, moved Princeton to follow the graduate degree year.
+
 HTML Data:
 
 1999-2000 – http://www.williams.edu/Registrar/catalog/deptlist9900.html

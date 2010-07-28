@@ -1,10 +1,10 @@
 Package: williams
 Type: Package
-Title: Read In Williams College Faculty Data
+Title: Williams College Data
 Version: 1.0
 Date: 2010-07-14
 Author: Andrew Leeser
-Maintainer: Andrew Leeser <aml05williams@yahoo.com>
-Description: More about what it does (maybe more than one line)
+Maintainer: Dave Kane <dave@kanecap.com>
+Description: This package is related to Williams College data. Currently it consists of data related to Williams COllege faculty over time.
 License: GPL (>= 2)
 LazyLoad: yes

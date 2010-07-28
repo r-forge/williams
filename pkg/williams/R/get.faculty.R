@@ -22,11 +22,21 @@ get.faculty <- function(output = FALSE){
     ## files that were generated from pdf files downloaded for
     ## academic years 2001-2010.
 
+    ## Note that there are currently 31 warnings when running
+    ## get.pdf.data. They are mostly recurring, but should be
+    ## researched an fixed.
+
     pdf.data <- get.pdf.data()
 
     ## get.html.data reads in Williams College faculty data from .txt
     ## files that were generated from html files downloaded for
     ## academic years 1998-2000.
+
+    ## Note that the html data includes many more faculty members than
+    ## in the pdf and manual data. This could be due to more types of
+    ## faculty being included in the data, or duplicates across
+    ## departments or other reasons. This should be researched and
+    ## fixed in the future such that it is consistent across sources.
 
     html.data <- get.html.data()
 
